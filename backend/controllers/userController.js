@@ -14,7 +14,7 @@ const generateToken = (id) => {
 
 // Register a user
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, confirmedPassword } = req.body;
 
   // Validate input:
   // Missing field
@@ -35,6 +35,11 @@ const registerUser = asyncHandler(async (req, res) => {
   if (password.length < 6) {
     res.status(400);
     throw new Error("Password length is at least 6 characters!");
+  }
+
+  if (password !== confirmedPassword) {
+    res.status(400);
+    throw new Error("Passwords do not match!");
   }
 
   // Create new user
