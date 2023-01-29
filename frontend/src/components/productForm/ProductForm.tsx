@@ -2,7 +2,7 @@ import React from 'react';
 
 import './productForm.scss';
 
-const ProductForm = () => {
+const ProductForm = (props: any) => {
   return (
     <div>ProductForm</div>
   )

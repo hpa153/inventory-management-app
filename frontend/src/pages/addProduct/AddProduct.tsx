@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../../redux/hooks/hooks';
 import { useNavigate } from 'react-router-dom';
 
 import ProductForm from '../../components/productForm/ProductForm';
-import { selectIsLoading } from '../../redux/features/product/productSlice';
+import { selectIsLoading, createNewProduct } from '../../redux/features/product/productSlice';
 import { createProduct } from '../../services/productService';
 
 const initialProduct = {
@@ -46,7 +46,7 @@ const AddProduct = () => {
     return skuStart + skuNumber;
   }
 
-  const saveProduct = async (e: React.FormEvent<HTMLFormElement>) => {
+  const saveProduct = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     let formData = new FormData();
@@ -63,7 +63,7 @@ const AddProduct = () => {
 
     formData = JSON.parse(JSON.stringify(formData.entries()));
     
-    // await dispatch(createProduct(formData));
+    dispatch(createNewProduct(formData));
     navigate("/dashboard");
   };
 
@@ -71,7 +71,7 @@ const AddProduct = () => {
     <div>
       <h3 className="--mt">Add New Product</h3>
       <ProductForm
-        product={product} 
+        product={product}
         productImage={productImage} 
         imagePreview={imagePreview} 
         description={description} 

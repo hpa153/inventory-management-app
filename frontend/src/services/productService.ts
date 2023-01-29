@@ -14,7 +14,7 @@ export type newProductProps = {
   image?: File,
 }
 
-const createProduct = async (formData: newProductProps) => {
+const createProduct = async (formData: FormData) => {
   const response = await axios.post(API_URL, formData);
 
   return response.data;
