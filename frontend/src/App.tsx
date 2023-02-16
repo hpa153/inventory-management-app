@@ -11,6 +11,12 @@ import Reset from "./pages/auth/Reset";
 import Sidebar from "./components/sidebar/Sidebar";
 import Layout from "./components/layout/Layout";
 import Dashboard from "./pages/dashboard/Dashboard";
+import AddProduct from "./pages/addProduct/AddProduct";
+import ProductDetails from "./components/products/productDetails/ProductDetails";
+import EditProduct from "./pages/editProduct/EditProduct";
+import Profile from "./pages/profile/Profile";
+import EditProfile from "./pages/profile/editProfile/EditProfile";
+import Contact from "./pages/contact/Contact";
 
 // Config axios to safe credentials from backend
 axios.defaults.withCredentials = true;
@@ -30,6 +36,48 @@ function App() {
           <Sidebar>
             <Layout>
               <Dashboard />
+            </Layout>
+          </Sidebar>
+        }/>
+        <Route path="/add-product" element={
+          <Sidebar>
+            <Layout>
+              <AddProduct />
+            </Layout>
+          </Sidebar>
+        }/>
+        <Route path="/product-details/:id" element={
+          <Sidebar>
+            <Layout>
+              <ProductDetails />
+            </Layout>
+          </Sidebar>
+        }/>
+        <Route path="/edit-product/:id" element={
+          <Sidebar>
+            <Layout>
+              <EditProduct />
+            </Layout>
+          </Sidebar>
+        }/>
+        <Route path="/profile" element={
+          <Sidebar>
+            <Layout>
+              <Profile />
+            </Layout>
+          </Sidebar>
+        }/>
+        <Route path="/edit-profile" element={
+          <Sidebar>
+            <Layout>
+              <EditProfile />
+            </Layout>
+          </Sidebar>
+        }/>
+        <Route path="/contact-us" element={
+          <Sidebar>
+            <Layout>
+              <Contact />
             </Layout>
           </Sidebar>
         }/>

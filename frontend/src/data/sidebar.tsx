@@ -30,14 +30,14 @@ const menu: sidebarType[] = [
       },
       {
         title: "Edit Profile",
-        path: "/update-profile",
+        path: "/edit-profile",
       },
     ],
   },
   {
-    title: "Report Bug",
+    title: "Contact Us",
     icon: <FaCommentAlt />,
-    path: "/contact",
+    path: "/contact-us",
   },
 ];
 

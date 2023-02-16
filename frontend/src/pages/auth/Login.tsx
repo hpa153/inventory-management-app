@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import './auth.scss';
 import Card from "../../components/card/Card";
 import { loginUser, userLoginProps } from '../../services/authService';
-import { set_login, set_name } from '../../redux/features/auth/authSlice';
+import { SET_LOGIN, SET_NAME } from '../../redux/features/auth/authSlice';
 import Loader from '../../components/loader/Loader';
 
 const initialState = {
@@ -49,8 +49,8 @@ const Login = () => {
 
     try {
       const data = await loginUser(userData);
-      await dispatch(set_name(data.name));
-      await dispatch(set_login(true)); 
+      await dispatch(SET_NAME(data.name));
+      await dispatch(SET_LOGIN(true)); 
       navigate("/dashboard");
     } catch (error) {      
       if(error instanceof Error) {

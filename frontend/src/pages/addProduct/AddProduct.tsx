@@ -1,12 +1,19 @@
 import { useState } from 'react';
-import { useAppSelector, useAppDispatch } from '../../redux/hooks/hooks';
 import { useNavigate } from 'react-router-dom';
 
-import ProductForm from '../../components/productForm/ProductForm';
-import { selectIsLoading } from '../../redux/features/product/productSlice';
-import { createProduct } from '../../services/productService';
+import ProductForm from '../../components/products/productForm/ProductForm';
+import { useAppSelector, useAppDispatch } from '../../redux/hooks/hooks';
+import { createNewProduct, selectIsLoading } from '../../redux/features/product/productSlice';
+import Loader from '../../components/loader/Loader';
 
-const initialProduct = {
+export type initialProductProps = {
+  name: string,
+  category: string,
+  quantity: string,
+  price: string,
+};
+
+export const initialProduct = {
   name: "",
   category: "",
   quantity: "",
@@ -33,7 +40,7 @@ const AddProduct = () => {
     });
   };
 
-  const handleImagechange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if(e.target.files) {
       setProductImage(e.target.files[0]);
       setImagePreview(URL.createObjectURL(e.target.files[0]));
@@ -43,7 +50,7 @@ const AddProduct = () => {
   const generateSKU = (category: string) => {
     const skuStart = category.slice(0, 3).toUpperCase();
     const skuNumber = Date.now();
-    return skuStart + skuNumber;
+    return skuStart + "-" + skuNumber;
   }
 
   const saveProduct = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -60,23 +67,22 @@ const AddProduct = () => {
     if (productImage){
       formData.append("image", productImage);
     }
-
-    formData = JSON.parse(JSON.stringify(formData.entries()));
     
-    // await dispatch(createProduct(formData));
+    dispatch(createNewProduct(formData));
     navigate("/dashboard");
   };
 
   return (
     <div>
+      {isLoading && <Loader />}
       <h3 className="--mt">Add New Product</h3>
       <ProductForm
         product={product} 
-        productImage={productImage} 
         imagePreview={imagePreview} 
         description={description} 
         setDescription={setDescription} 
         handleFormInput={handleFormInput} 
+        handleImageChange={handleImageChange} 
         saveProduct={saveProduct} 
       />
     </div>
