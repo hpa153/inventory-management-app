@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { getLoginStatus } from '../services/authService';
-import { set_login } from '../redux/features/auth/authSlice';
+import { SET_LOGIN } from '../redux/features/auth/authSlice';
 
 const useRedirectLoggedOutUser = (path: string) => {
   const dispatch = useDispatch();
@@ -13,10 +13,10 @@ const useRedirectLoggedOutUser = (path: string) => {
   useEffect(() => {
     const redirectLoggedOutUser = async () => {
       const isLoggedIn = await getLoginStatus();
-      dispatch(set_login(isLoggedIn));
+      dispatch(SET_LOGIN(isLoggedIn));
 
       if(!isLoggedIn) {
-        toast.info("Session expired. please login to continue!");
+        toast.info("Session expired. Please login to continue!");
         navigate(path);
       }
     }

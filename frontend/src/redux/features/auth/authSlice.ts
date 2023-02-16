@@ -7,7 +7,7 @@ export type userProps = {
   email: string,
   phone: string,
   bio: string,
-  photo: string,
+  avatar: string,
 }
 
 export interface authProps {
@@ -24,7 +24,7 @@ const user = {
   email: "",
   phone: "",
   bio: "",
-  photo: "",
+  avatar: "",
 };
 
 const initialState: authProps = {
@@ -37,21 +37,21 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    set_login: (state, action: PayloadAction<boolean>) => {
+    SET_LOGIN: (state, action: PayloadAction<boolean>) => {
       state.isLoggedIn= action.payload;
     },
-    set_name: (state, action: PayloadAction<string>) => {
+    SET_NAME: (state, action: PayloadAction<string>) => {
       localStorage.setItem("name", JSON.stringify(action.payload));
       state.name = action.payload;
     },
-    set_user: (state, action: PayloadAction<userProps>) => {
+    SET_USER: (state, action: PayloadAction<userProps>) => {
       state.user = action.payload;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { set_login, set_name, set_user } = authSlice.actions;
+export const { SET_LOGIN, SET_NAME, SET_USER } = authSlice.actions;
 
 export const selectIsLoggedIn = (state: RootState) => state.auth.isLoggedIn;
 export const selectName = (state: RootState) => state.auth.name;
